@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div>
+    <table class="table table-bordered">
+      <tr>
+          <th scope="col">Office Transaction</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col" style="cursor: pointer;" (click)="openModal(newTransaction)">+Add Transaction</th>
+        </tr> 
+      <tr>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr> 
+        <tr class="thead-light">
+          <th scope="col" class="align-middle">Date</th>
+          <th scope="col" class="align-middle">Description</th>
+          <th scope="col" class="align-middle">Credit</th>
+          <th scope="col" class="align-middle">Debit</th>
+          <th scope="col" class="align-middle">Running Balance</th>
+        </tr>
+      <tbody>
+        <tr **ngFor="let transaction of transactionData">
+          <td class="align-middle">{{transaction.date}}</td>
+          <td class="align-middle">{{transaction.description}}</td>
+          <td class="align-middle">{{transaction.credit}</td>
+          <td class="align-middle">{{transaction.debit}}</td>
+          <td class="align-middle">{{transaction.runningBalance}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #newTransaction>
+
+<app-new-transaction-modal (getData)="getData($event)" [modalRef]="modalRef"></app-new-transaction-modal>
+</ng-template>

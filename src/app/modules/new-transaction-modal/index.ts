@@ -1,0 +1,1 @@
+export * from './new-transaction-modal.component';
