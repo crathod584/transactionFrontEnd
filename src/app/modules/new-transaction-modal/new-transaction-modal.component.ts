@@ -20,6 +20,7 @@ export class NewTransactionModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.form)
   }
 
   get form() { return this.newTransactionForm.controls; }
@@ -28,14 +29,23 @@ export class NewTransactionModalComponent implements OnInit {
     this.newTransactionForm = this.fb.group({
       transactionType: ["", Validators.required],
       amount: ["", Validators.required],
-      description: ["", Validators.required]
+      description: ["", Validators.required],
+      date:new Date()
     });
   }
 
 
   addTransaction(){
+    let data = this.newTransactionForm.value;
+    if(this.newTransactionForm.value.transactionType == "Debit"){
+      data.debit = this.newTransactionForm.value.amount;   
+    }else{
+      data.credit = this.newTransactionForm.value.amount;   
+    }
+
   	this.transactionService.addTransaction(this.newTransactionForm.value).subscribe((res) =>{
-      this.getData.emit(res.data);
+      this.getData.emit();
+      this.modalRef.hide();
     }, (err) => {
       console.log('err',err)
     });

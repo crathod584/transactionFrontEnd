@@ -23,11 +23,11 @@
           <th scope="col" class="align-middle">Running Balance</th>
         </tr>
       <tbody>
-        <tr **ngFor="let transaction of transactionData">
-          <td class="align-middle">{{transaction.date}}</td>
+        <tr *ngFor="let transaction of transactionData">
+          <td class="align-middle">{{transaction.date | date}}</td>
           <td class="align-middle">{{transaction.description}}</td>
-          <td class="align-middle">{{transaction.credit}</td>
-          <td class="align-middle">{{transaction.debit}}</td>
+          <td class="align-middle">{{transaction.credit?transaction.credit:'-'}}</td>
+          <td class="align-middle">{{transaction.debit? transaction.debit:'-'}}</td>
           <td class="align-middle">{{transaction.runningBalance}}</td>
         </tr>
       </tbody>
@@ -37,5 +37,5 @@
 
 <ng-template #newTransaction>
 
-<app-new-transaction-modal (getData)="getData($event)" [modalRef]="modalRef"></app-new-transaction-modal>
+<app-new-transaction-modal (getData)="getData()" [modalRef]="modalRef"></app-new-transaction-modal>
 </ng-template>

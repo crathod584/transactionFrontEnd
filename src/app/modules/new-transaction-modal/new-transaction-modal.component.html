@@ -14,23 +14,27 @@
           <option>Credit</option>
           <option>Debit</option>
         </select>
+        <span class="error-msg" *ngIf="form.transactionType.touched && form.transactionType.errors">This is required</span>
+
       </div>
     </div>
     <div class="form-group row">
       <label class="col-sm-2 col-form-label">Amount</label>
       <div class="col-sm-10">
         <input type="number" formControlName="amount" placeholder="Amount" class="form-control">
+        <span class="error-msg" *ngIf="form.amount.touched && form.amount.errors">This is required</span>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-sm-2 col-form-label">Description</label>
       <div class="col-sm-10">
         <textarea class="form-control" formControlName="description"> </textarea>
+        <span class="error-msg" *ngIf="form.description.touched && form.description.errors">This is required</span>
       </div>
     </div>
   </form>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
-  <button type="button" class="btn btn-primary" (click)="addTransaction()">Save</button>
+  <button type="button" class="btn btn-primary" [disabled]="newTransactionForm.invalid" (click)="addTransaction()">{{form.invalid}}Save</button>
 </div>

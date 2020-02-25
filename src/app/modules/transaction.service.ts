@@ -14,7 +14,7 @@ export class TransactionService {
     return this.http.post<any>(`${environment.backend_server_url}/addTransaction`,data);
   }
 
-  getTransaction(data):Observable<any>{
+  getTransaction():Observable<any>{
     return this.http.get<any>(`${environment.backend_server_url}/getTransaction`);
   }
 }
