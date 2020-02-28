@@ -11,8 +11,9 @@ import { TransactionService } from '../transaction.service';
 export class NewTransactionModalComponent implements OnInit {
   
   @Input() modalRef:BsModalRef;
+  @Input() runningBalance:number;
   @Output() getData = new EventEmitter(); 
-
+  
   newTransactionForm: FormGroup;
 
   constructor(private fb: FormBuilder,private transactionService:TransactionService) {
@@ -38,9 +39,11 @@ export class NewTransactionModalComponent implements OnInit {
   addTransaction(){
     let data = this.newTransactionForm.value;
     if(this.newTransactionForm.value.transactionType == "Debit"){
-      data.debit = this.newTransactionForm.value.amount;   
+      data.debit = this.newTransactionForm.value.amount;  
+      data.runningBalance = this.runningBalance - this.newTransactionForm.value.amount; 
     }else{
       data.credit = this.newTransactionForm.value.amount;   
+      data.runningBalance = this.runningBalance + this.newTransactionForm.value.amount;  
     }
 
   	this.transactionService.addTransaction(this.newTransactionForm.value).subscribe((res) =>{

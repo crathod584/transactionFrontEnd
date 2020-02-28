@@ -11,6 +11,7 @@ export class TransactionComponent implements OnInit {
   
   modalRef: BsModalRef;
   transactionData:any;
+  runningBalance:number = 0;
   
   constructor(private modalService: BsModalService, private transactionService:TransactionService) { }
 
@@ -29,6 +30,9 @@ export class TransactionComponent implements OnInit {
 
     this.transactionService.getTransaction().subscribe((res) =>{
       this.transactionData = res;
+      if(this.transactionData[0].runningBalance){
+         this.runningBalance = this.transactionData[0].runningBalance;
+      }
     }, (err) => {
       console.log('err',err)
     });
